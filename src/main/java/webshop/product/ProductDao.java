@@ -37,6 +37,19 @@ public class ProductDao {
 
         return keyHolder.getKey().longValue();
     }
+    public void insertProduct(Product product) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemp.update(con -> {
+            PreparedStatement stmt = con.prepareStatement(
+                    "INSERT INTO products(name,price,stock) VALUES(?,?,?);",
+                    Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, product.getName());
+            stmt.setInt(2, product.getPrice());
+            stmt.setInt(3, product.getStock());
+
+            return stmt;
+        }, keyHolder);
+    }
 
 // ELEGENDŐ a terméknevek listájával visszatérés, vagy termékek listájával? (pl.: vásárlásnál mindent lát, ha lekéri)
     public Optional<List<String>> listProductsName() {
@@ -45,7 +58,6 @@ public class ProductDao {
                         "SELECT name FROM products",
                         this::mapRow));
     }
-
 
     public Product findProductById(long id) {
         return jdbcTemp.queryForObject(
@@ -69,4 +81,5 @@ public class ProductDao {
     private String mapRow(ResultSet rs, int rowNum) throws SQLException {
         return rs.getString("name");
     }
+
 }
