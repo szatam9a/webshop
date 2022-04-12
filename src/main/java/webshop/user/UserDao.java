@@ -18,8 +18,7 @@ public class UserDao {
     }
 
 
-
-    public long saveUser(User user){
+    public long saveUser(User user) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         //userID,ID,email,password
         jdbcTemplate.update(con -> {
@@ -28,8 +27,7 @@ public class UserDao {
                     Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmailAddress());
-            stmt.setInt( 3, user.getPassword());
-
+            stmt.setInt(3, user.getPassword());
 
 
             return stmt;
@@ -37,4 +35,7 @@ public class UserDao {
 
         return keyHolder.getKey().longValue();
     }
+
+    // public boolean logIn (String name, String password) {
+//}
 }

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/java-sv2-labs.iml" filepath="$PROJECT_DIR$/java-sv2-labs.iml" />
       <module fileurl="file://$PROJECT_DIR$/labs-csopormunka.iml" filepath="$PROJECT_DIR$/labs-csopormunka.iml" />
     </modules>
   </component>
