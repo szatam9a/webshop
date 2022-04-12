@@ -28,10 +28,7 @@ public class UserDao {
                     Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmailAddress());
-            stmt.setInt( 3, user.getPassword());
-
-
-
+            stmt.setInt( 3, user.getPassword().hashCode());
             return stmt;
         }, keyHolder);
 
