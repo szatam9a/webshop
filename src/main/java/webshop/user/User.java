@@ -1,5 +1,8 @@
 package webshop.user;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+
 public class User {
     private int ID;
     private String name;
@@ -50,4 +53,22 @@ public class User {
     public void setPassword(int password) {
         this.password = password;
     }
+
+
+    public long insertUser(String userName, String email, String password) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemp.update(con -> {
+            PreparedStatement stmt = con.prepareStatement(
+                    "INSERT INTO products(product_name,price,stock) " +
+                            " VALUES(?,?,?);",
+                    Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, userName);
+            stmt.setInt(2, email);
+            stmt.setInt(3, password);
+            return stmt;
+        }, keyHolder);
+
+        return keyHolder.getKey().longValue();
+    }
+
 }
