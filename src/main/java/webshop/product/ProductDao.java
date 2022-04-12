@@ -58,7 +58,7 @@ public class ProductDao {
                 id);
     }
 
-    public void decreasedProductStock(long id, int amount) {
+    public void increasedProductStock(long id, int amount) {
         jdbcTemp.update(
                 "UPDATE products" +
                         " SET stock = stock + ?" +

@@ -13,6 +13,6 @@ public class ProductService {
         if(product.getStock() < amount) {
             throw new IllegalArgumentException("Low stock");
         }
-        productDao.decreasedProductStock(id, amount);
+        productDao.increasedProductStock(id, amount);
     }
 }

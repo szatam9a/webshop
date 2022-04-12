@@ -18,16 +18,16 @@ public class UserDao {
     }
 
 
-    public long saveUser(User user) {
+    public long saveUser(String name, String email, String password) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         //userID,ID,email,password
         jdbcTemplate.update(con -> {
             PreparedStatement stmt = con.prepareStatement(
                     "INSERT INTO products(name,email,password) VALUES(?,?,?,?);",
                     Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, user.getName());
-            stmt.setString(2, user.getEmailAddress());
-            stmt.setInt(3, user.getPassword());
+            stmt.setString(1, name);
+            stmt.setString(2, email);
+            stmt.setString(3, password);
 
 
             return stmt;
