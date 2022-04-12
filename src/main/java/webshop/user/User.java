@@ -1,22 +1,28 @@
 package webshop.user;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-
+@Entity
 public class User {
+    @Id
     private int ID;
     private String name;
     private String emailAddress;
-    private int password;
+    private String password;
 
-    public User(int ID, String name, String emailAddress, int password) {
+    public User() {
+    }
+
+    public User(int ID, String name, String emailAddress, String password) {
         this.ID = ID;
         this.name = name;
         this.emailAddress = emailAddress;
         this.password = password;
     }
 
-    public User(String name, String emailAddress, int password) {
+    public User(String name, String emailAddress, String password) {
         this.name = name;
         this.emailAddress = emailAddress;
         this.password = password;
@@ -46,29 +52,11 @@ public class User {
         this.emailAddress = emailAddress;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
-
-
-    public long insertUser(String userName, String email, String password) {
-        KeyHolder keyHolder = new GeneratedKeyHolder();
-        jdbcTemp.update(con -> {
-            PreparedStatement stmt = con.prepareStatement(
-                    "INSERT INTO products(product_name,price,stock) " +
-                            " VALUES(?,?,?);",
-                    Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, userName);
-            stmt.setInt(2, email);
-            stmt.setInt(3, password);
-            return stmt;
-        }, keyHolder);
-
-        return keyHolder.getKey().longValue();
-    }
-
 }

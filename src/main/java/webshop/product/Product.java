@@ -7,5 +7,4 @@ public class Product {
     private int product_price;
 
 
-
 }
