@@ -3,6 +3,7 @@ package webshop.user;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import webshop.product.Product;
 
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
@@ -18,20 +19,26 @@ public class UserDao {
     }
 
 
-
-    public long saveUser(User user){
+    public long saveUser(User user) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         //userID,ID,email,password
         jdbcTemplate.update(con -> {
             PreparedStatement stmt = con.prepareStatement(
-                    "INSERT INTO products(name,email,password) VALUES(?,?,?,?);",
+                    "INSERT INTO user(name,email,password) VALUES(?,?,?);",
                     Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmailAddress());
-            stmt.setInt( 3, user.getPassword().hashCode());
+            stmt.setInt(3, user.getPassword());
             return stmt;
         }, keyHolder);
 
         return keyHolder.getKey().longValue();
+    }
+
+    public User findUserById(long id) {
+        return (jdbcTemplate.queryForObject("select * from user where user_id = ?",
+                (rs, rowNum) -> new User(rs.getInt("user_id"), rs.getString("name"),
+                        rs.getString("email"), (rs.getInt("password")))
+                , id));
     }
 }

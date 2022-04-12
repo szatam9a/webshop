@@ -1,5 +1,6 @@
 package webshop.user;
 
+import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mariadb.jdbc.MariaDbDataSource;
@@ -12,21 +13,30 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserDaoTest {
 
-    DataSource dataSource = new MariaDbDataSource();
+    Flyway flyway;
+    UserDao userDao;
 
     @BeforeEach
-    void init(){
+    void init() {
         MariaDbDataSource dataSource = new MariaDbDataSource();
         try {
-            dataSource.setUrl("jdbc:mariadb://localhost:3306/exam-test?useUnicode=true");
+            dataSource.setUrl("jdbc:mariadb://localhost:3306/webshop?useUnicode=true");
             dataSource.setUser("root");
             dataSource.setPassword("root");
         } catch (SQLException sqle) {
             throw new IllegalStateException("Cannot reach DataBase!", sqle);
         }
+
+        flyway = Flyway.configure().dataSource(dataSource).load();
+        flyway.clean();
+        flyway.migrate();
+
+        userDao = new UserDao(dataSource);
     }
+
     @Test
     void saveUserTest() {
-
+        long id = userDao.saveUser(new User("Name", "Email", "Password".hashCode()));
+        System.out.println(userDao.findUserById(id));
     }
 }

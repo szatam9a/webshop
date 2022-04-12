@@ -7,16 +7,16 @@ public class User {
     private int ID;
     private String name;
     private String emailAddress;
-    private String password;
+    private int password;
 
-    public User(int ID, String name, String emailAddress, String password) {
+    public User(int ID, String name, String emailAddress, int password) {
         this.ID = ID;
         this.name = name;
         this.emailAddress = emailAddress;
         this.password = password;
     }
 
-    public User(String name, String emailAddress, String password) {
+    public User(String name, String emailAddress, int password) {
         this.name = name;
         this.emailAddress = emailAddress;
         this.password = password;
@@ -46,11 +46,11 @@ public class User {
         this.emailAddress = emailAddress;
     }
 
-    public String getPassword() {
+    public int getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(int password) {
         this.password = password;
     }
 
