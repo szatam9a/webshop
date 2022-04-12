@@ -25,10 +25,10 @@ public class UserDao {
         jdbcTemplate.update(con -> {
             PreparedStatement stmt = con.prepareStatement(
                     "INSERT INTO products(name,email,password) VALUES(?,?,?,?);",
-                    stmt.setString(1, user.getName());
-                    stmt.setString(2, user.getEmailAddress());
-                    stmt.setInt( 3, user.getPassword().hashCode());
                     Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, user.getName());
+            stmt.setString(2, user.getEmailAddress());
+            stmt.setInt( 3, user.getPassword());
 
 
 
