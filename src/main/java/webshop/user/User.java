@@ -32,6 +32,14 @@ public class User {
         return getPassword() == user.getPassword() && Objects.equals(getEmailAddress(), user.getEmailAddress());
     }
 
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(getEmailAddress(), getPassword());

@@ -28,11 +28,14 @@ public class UserService {
     }
 
 
-//    public boolean loginUser(User user) {
-//        Optional<User> emailAccessUser = Optional.of(userDao.findUserByEmail(user.getEmailAddress()));
-//        if (emailAccessUser.isPresent()) {
-//            if (user.equals(emailAccessUser)) {
-//            }
-//        }
-//    }
+    public boolean loginUser(User user) {
+        Optional<User> emailAccessUser = Optional.of(userDao.findUserByEmail(user.getEmailAddress()));
+        if (emailAccessUser.isPresent()) {
+            if (user.equals(emailAccessUser)) {
+                user.setLoggedIn(true);
+                return true;
+            }
+        }
+        return false;
+    }
 }
