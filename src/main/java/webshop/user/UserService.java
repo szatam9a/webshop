@@ -12,13 +12,17 @@ public class UserService {
 
     public void saveUser(String name, String email, String password) {
         User user = new User(name, email, password.hashCode());
+        if (hasUser(user)){
+            System.out.println("user already exist");
+            return;
+        }
         userDao.saveUser(user);
     }
 
     public boolean hasUser(User user) {
         Optional<User> userToCheck = Optional.of(userDao.findUserByEmail(user.getEmailAddress()));
         if (userToCheck.isPresent()) {
-            throw new IllegalArgumentException("the email address is already taken");
+            return true;
         }
         return false;
     }

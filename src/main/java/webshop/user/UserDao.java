@@ -53,7 +53,7 @@ public class UserDao {
                             rs.getString("email"), (rs.getLong("password")))
                     , name));
         } catch (Exception e) {
-            throw new IllegalStateException("no user", e);
+            return null;
         }
     }
 
@@ -64,7 +64,7 @@ public class UserDao {
                             rs.getString("email"), (rs.getLong("password")))
                     , email));
         } catch (Exception e) {
-            throw new IllegalStateException("no user", e);
+            return null;
         }
     }
 
