@@ -1,8 +1,8 @@
 CREATE TABLE `users` (
-	`user_id` INT(11) NOT NULL AUTO_INCREMENT,
-	`name` CHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
-	`email` CHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
-	`password` int(50) NULL DEFAULT NULL,
+	`user_id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`name` CHAR(50) NOT NULL COLLATE 'latin1_swedish_ci',
+	`email` CHAR(50) NOT NULL COLLATE 'latin1_swedish_ci',
+	`password` BIGINT(20) NOT NULL,
 	PRIMARY KEY (`user_id`) USING BTREE
 )
 COLLATE='latin1_swedish_ci'
