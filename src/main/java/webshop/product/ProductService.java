@@ -35,9 +35,8 @@ public class ProductService {
 
     private void addProductFromLine(String line) {
         String[] elements = line.split(";");
-        productDao.insertProduct(new Product(
-                elements[0],
-                Integer.parseInt(elements[1])
-        ));
+        productDao.insertProduct(
+                new Product(elements[0], Integer.parseInt(elements[1]))
+        );
     }
 }

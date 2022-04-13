@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.mariadb.jdbc.MariaDbDataSource;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,7 +28,7 @@ class ProductDaoTest {
         try {
             dataSource.setUrl("jdbc:mariadb://localhost:3306/webshop?useUnicode=true");
             dataSource.setUser("root");
-            dataSource.setPassword("root555");
+            dataSource.setPassword("root");
         } catch (SQLException sqle) {
             throw new IllegalStateException("Cannot reach DataBase!", sqle);
         }
@@ -61,7 +60,7 @@ class ProductDaoTest {
 
     @Test
     @DisplayName("TEST-List: Products List is beautiful.")
-    void listProducts() {
+    void testListProducts() {
         productDao.insertProduct(testProduct);
         List<Product> testProducts = productDao.listProducts();
 
@@ -72,10 +71,11 @@ class ProductDaoTest {
 
     @Test
     @DisplayName("TEST-ID: Products ID is beautiful.")
-    void findProductById() {
+    void testFindProductById() {
         productDao.insertProduct(testProduct);
         Product testProductActual = productDao.findProductById(1);
 
+        assertEquals(false, testProductActual.equals(testProduct));
         assertEquals(1, testProductActual.getID());
         assertEquals(testTrueProductName, testProductActual.getName());
         assertEquals(testTruePrice, testProductActual.getPrice());
