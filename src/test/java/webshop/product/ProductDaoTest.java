@@ -5,10 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mariadb.jdbc.MariaDbDataSource;
-import webshop.user.User;
-import webshop.user.UserDao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,8 +17,10 @@ class ProductDaoTest {
     Flyway flyway;
     MariaDbDataSource dataSource = new MariaDbDataSource();
     ProductDao productDao = new ProductDao(dataSource);
+
     String testTrueProductName = "TEST_ProductName";
-    int testTrueInt = 123_456_789;
+    int testTruePrice = 123_456_789;
+    Product testProduct = new Product(testTrueProductName, testTruePrice);
 
     @BeforeEach
     void init() {
@@ -36,12 +38,31 @@ class ProductDaoTest {
     }
 
     @Test
-    @DisplayName("TEST-Create: Product-object is successfully. ")
+    @DisplayName("TEST-Create: Product object created successfully.")
     void testCreate() {
+        assertEquals("TEST_ProductName", testProduct.getName());
+        assertEquals(123_456_789, testProduct.getPrice());
+    }
 
-        Product product = new Product(testTrueProductName, testTrueInt);
 
-        assertEquals("TEST_ProductName", product.getName());
-        assertEquals(123_456_789, product.getPrice());
+    @Test
+    @DisplayName("TEST-Insert: Insert Product is successfully.")
+    void testInsertProduct() {
+        productDao.insertProduct(testProduct);
+        assertEquals(1, productDao.listProducts().size());
+        assertEquals(0, productDao.listProducts().get(0).getID());
+        assertEquals(testTrueProductName, productDao.listProducts().get(0).getName());
+        assertEquals(testTruePrice, productDao.listProducts().get(0).getPrice());
+    }
+
+    @Test
+    void listProducts() {
+        productDao.insertProduct(testProduct);
+        assertEquals(1, productDao.listProducts().size());
+        assertEquals(0, productDao.listProducts().get(0).getID());
+    }
+
+    @Test
+    void findProductById() {
     }
 }

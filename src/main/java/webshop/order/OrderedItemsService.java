@@ -1,4 +1,4 @@
-package webshop.product.order;
+package webshop.order;
 
 public class OrderedItemsService {
 }
