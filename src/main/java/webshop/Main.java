@@ -2,7 +2,7 @@ package webshop;
 
 import org.flywaydb.core.Flyway;
 import org.mariadb.jdbc.MariaDbDataSource;
-import webshop.product.ProductDao;
+//import webshop.product.ProductDao;
 import webshop.user.User;
 import webshop.user.UserDao;
 
@@ -17,12 +17,18 @@ public class Main {
     private final Scanner scan = new Scanner(System.in);
     private boolean terminated;
     private UserDao userDao;
-    private final ProductDao productDao = null;
+    //private final ProductDao productDao = null;
+
+
+    public Main(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     public static void main(String[] args) {
 
         MariaDbDataSource dataSource = new MariaDbDataSource();
-        Main mainController = new Main();
+        Main mainController = new Main(new UserDao(dataSource));
+
 
 
         try {
@@ -87,7 +93,7 @@ public class Main {
                 break;
             case 5:
                 System.out.print("\n Kérem a bevételezni kívánt termék ID-jét, és bevételezendő mennyiséget.");
-                productDao.increasedProductStock(scan.nextLong(),scan.nextInt());
+                //productDao.increasedProductStock(scan.nextLong(), scan.nextInt());
                 break;
             case 6:
                 break;

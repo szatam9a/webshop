@@ -1,7 +1,11 @@
 package webshop.user;
 
+import webshop.product.Product;
+
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 public class User {
@@ -10,12 +14,14 @@ public class User {
     private String emailAddress;
     private long password;
     private boolean loggedIn;
+    private List<Product> shoppingCart;
 
     public User(int ID, String name, String emailAddress, long password) {
         this.ID = ID;
         this.name = name;
         this.emailAddress = emailAddress;
         this.password = password;
+        this.shoppingCart = new LinkedList<>();
     }
 
     public User(String name, String emailAddress, long password) {
