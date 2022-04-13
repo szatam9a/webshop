@@ -41,7 +41,7 @@ class ProductDaoTest {
 
         Product product = new Product(testTrueProductName, testTrueInt);
 
-        assertEquals("Budapest", product.getName());
+        assertEquals("TEST_ProductName", product.getName());
         assertEquals(123_456_789, product.getPrice());
     }
 }
