@@ -2,24 +2,24 @@ package webshop.product;
 
 public class Product {
 
-    private final long ID;
+    private final long id;
     private final String name;
     private final int price;
-    private final int stock;
+//    private final int stock;
 
-    public Product(long ID, String name, int price, int stock) {
-        this.ID = ID;
+    public Product(long id, String name, int price) {
+        this.id = id;
         this.name = name;
         this.price = price;
-        this.stock = stock;
+//        this.stock = stock;
     }
 
-    public Product(String name, int price, int stock) {
-        this(0, name, price, stock);
+    public Product(String name, int price) {
+        this(0, name, price);
     }
 
     public long getID() {
-        return ID;
+        return id;
     }
 
     public String getName() {
@@ -30,8 +30,8 @@ public class Product {
         return price;
     }
 
-    public int getStock() {
-        return stock;
-    }
+//    public int getStock() {
+//        return stock;
+//    }
 
 }

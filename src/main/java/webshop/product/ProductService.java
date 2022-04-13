@@ -13,13 +13,13 @@ public class ProductService {
         this.productDao = productDao;
     }
 
-    public void saleProduct(long id, int amount) {
-        Product product = productDao.findProductById(id);
-        if (product.getStock() < amount) {
-            throw new IllegalArgumentException("Low stock");
-        }
-        productDao.increasedProductStock(id, amount);
-    }
+//    public void saleProduct(long id, int amount) {
+//        Product product = productDao.findProductById(id);
+//        if (product.getStock() < amount) {
+//            throw new IllegalArgumentException("Low stock");
+//        }
+//        productDao.increasedProductStock(id, amount);
+//    }
 
     public void loadProductFromFile(Path path) {
         try (BufferedReader br = Files.newBufferedReader(path)) {
@@ -37,8 +37,7 @@ public class ProductService {
         String[] elements = line.split(";");
         productDao.insertProduct(new Product(
                 elements[0],
-                Integer.parseInt(elements[1]),
-                Integer.parseInt(elements[2])
+                Integer.parseInt(elements[1])
         ));
     }
 }
