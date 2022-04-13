@@ -12,5 +12,5 @@ ENGINE=InnoDB
 CREATE TABLE product (
     product_id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name CHAR(50),
-    price INT(12),
+    price INT(12)
 );
