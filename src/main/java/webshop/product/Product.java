@@ -18,6 +18,15 @@ public class Product {
         this(0, name, price);
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                '}';
+    }
+
     public long getID() {
         return id;
     }

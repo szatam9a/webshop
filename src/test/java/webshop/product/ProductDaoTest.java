@@ -9,6 +9,7 @@ import org.mariadb.jdbc.MariaDbDataSource;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,11 +24,11 @@ class ProductDaoTest {
     Product testProduct = new Product(testTrueProductName, testTruePrice);
 
     @BeforeEach
-    /*void init() {
+    void init() {
         try {
             dataSource.setUrl("jdbc:mariadb://localhost:3306/webshop?useUnicode=true");
             dataSource.setUser("root");
-            dataSource.setPassword("root");
+            dataSource.setPassword("root555");
         } catch (SQLException sqle) {
             throw new IllegalStateException("Cannot reach DataBase!", sqle);
         }
@@ -35,7 +36,7 @@ class ProductDaoTest {
         flyway = Flyway.configure().dataSource(dataSource).load();
         flyway.clean();
         flyway.migrate();
-    }*/
+    }
 
     @Test
     @DisplayName("TEST-Create: Product object created successfully.")
@@ -56,13 +57,17 @@ class ProductDaoTest {
     }
 
     @Test
+    @DisplayName("TEST-List: Products List is beautiful.")
     void listProducts() {
         productDao.insertProduct(testProduct);
         assertEquals(1, productDao.listProducts().size());
         assertEquals(0, productDao.listProducts().get(0).getID());
+        assertEquals(Arrays.asList(testProduct).toString(), productDao.listProducts().toString());
     }
 
     @Test
+    @DisplayName("TEST-ID: Products ID is beautiful.")
     void findProductById() {
+
     }
 }

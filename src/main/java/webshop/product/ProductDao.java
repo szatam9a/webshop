@@ -42,7 +42,8 @@ public class ProductDao {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemp.update(con -> {
             PreparedStatement stmt = con.prepareStatement(
-                    "INSERT INTO products(name,price) VALUES(?,?);",
+                    "INSERT INTO products(name,price)" +
+                            " VALUES(?,?);",
                     Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, product.getName());
             stmt.setInt(2, product.getPrice());
