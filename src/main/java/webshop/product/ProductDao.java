@@ -52,11 +52,10 @@ public class ProductDao {
     }
 
 // ELEGENDŐ a terméknevek listájával visszatérés, vagy termékek listájával? (pl.: vásárlásnál mindent lát, ha lekéri)
-    public Optional<List<Product>> listProductsName() {
-        return Optional.of(
-                jdbcTemp.query(
+    public List<Product> listProducts() {
+        return jdbcTemp.query(
                         "SELECT name FROM products",
-                        this::mapRow));
+                        this::mapRow).stream().toList());
     }
 
     public Product findProductById(long id) {
