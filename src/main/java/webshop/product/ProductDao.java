@@ -52,7 +52,7 @@ public class ProductDao {
     }
 
 // ELEGENDŐ a terméknevek listájával visszatérés, vagy termékek listájával? (pl.: vásárlásnál mindent lát, ha lekéri)
-    public Optional<List<String>> listProductsName() {
+    public Optional<List<Product>> listProductsName() {
         return Optional.of(
                 jdbcTemp.query(
                         "SELECT name FROM products",
