@@ -68,6 +68,7 @@ class ProductDaoTest {
     @Test
     @DisplayName("TEST-ID: Products ID is beautiful.")
     void findProductById() {
-
+        productDao.insertProduct(testProduct);
+        assertEquals(testProduct, productDao.findProductById(0));
     }
 }
