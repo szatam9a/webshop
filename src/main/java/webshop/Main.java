@@ -3,11 +3,13 @@ package webshop;
 import org.flywaydb.core.Flyway;
 import org.mariadb.jdbc.MariaDbDataSource;
 //import webshop.product.ProductDao;
+import webshop.order.OrderDao;
 import webshop.user.User;
 import webshop.user.UserDao;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -33,8 +35,8 @@ public class Main {
 
         try {
             dataSource.setUrl("jdbc:mariadb://localhost:3306/webshop?useUnicode=true");
-            dataSource.setUser("root");
-            dataSource.setPassword("root");
+            dataSource.setUser("webshops");
+            dataSource.setPassword("webshops");
         } catch (
                 SQLException sqle) {
             throw new IllegalStateException("Cannot reach DataBase!", sqle);
@@ -43,6 +45,9 @@ public class Main {
         Flyway flyway = Flyway.configure().dataSource(dataSource).load();
         flyway.clean();
         flyway.migrate();
+
+        OrderDao orderDao = new OrderDao(dataSource);
+        orderDao.insertOrder(11, LocalDate.of(2022, 02, 11));
 
         try {
             while (!mainController.terminated)

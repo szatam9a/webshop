@@ -23,7 +23,7 @@ class ProductDaoTest {
     Product testProduct = new Product(testTrueProductName, testTruePrice);
 
     @BeforeEach
-    void init() {
+    /*void init() {
         try {
             dataSource.setUrl("jdbc:mariadb://localhost:3306/webshop?useUnicode=true");
             dataSource.setUser("root");
@@ -35,7 +35,7 @@ class ProductDaoTest {
         flyway = Flyway.configure().dataSource(dataSource).load();
         flyway.clean();
         flyway.migrate();
-    }
+    }*/
 
     @Test
     @DisplayName("TEST-Create: Product object created successfully.")

@@ -1,0 +1,1 @@
+create table orders(id bigint auto_increment, user_id varchar(255), order_date date, constraint pk_orders primary key(id));
