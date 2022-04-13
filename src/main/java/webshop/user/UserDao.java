@@ -24,7 +24,7 @@ public class UserDao {
         //userID,ID,email,password
         jdbcTemplate.update(con -> {
             PreparedStatement stmt = con.prepareStatement(
-                    "INSERT INTO user(name,email,password) VALUES(?,?,?);",
+                    "INSERT INTO users(name,email,password) VALUES(?,?,?);",
                     Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmailAddress());
@@ -36,7 +36,7 @@ public class UserDao {
     }
 
     public User findUserById(long id) {
-        return (jdbcTemplate.queryForObject("select * from user where user_id = ?",
+        return (jdbcTemplate.queryForObject("select * from users where user_id = ?",
                 (rs, rowNum) -> new User(rs.getInt("user_id"), rs.getString("name"),
                         rs.getString("email"), (rs.getInt("password")))
                 , id));
