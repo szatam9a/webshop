@@ -15,16 +15,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProductDaoTest {
 
-    Flyway flyway;
-    MariaDbDataSource dataSource = new MariaDbDataSource();
-    ProductDao productDao = new ProductDao(dataSource);
+    ProductDao productDao;
 
     String testTrueProductName = "TEST_ProductName";
     int testTruePrice = 123_456_789;
     Product testProduct = new Product(testTrueProductName, testTruePrice);
 
     @BeforeEach
-    void init() {
+    void setUp() {
+        MariaDbDataSource dataSource = new MariaDbDataSource();
+        productDao = new ProductDao(dataSource);
+
         try {
             dataSource.setUrl("jdbc:mariadb://localhost:3306/webshop?useUnicode=true");
             dataSource.setUser("root");
@@ -33,7 +34,7 @@ class ProductDaoTest {
             throw new IllegalStateException("Cannot reach DataBase!", sqle);
         }
 
-        flyway = Flyway.configure().dataSource(dataSource).load();
+        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
         flyway.clean();
         flyway.migrate();
     }
@@ -45,30 +46,38 @@ class ProductDaoTest {
         assertEquals(123_456_789, testProduct.getPrice());
     }
 
-
     @Test
     @DisplayName("TEST-Insert: Insert Product is successfully.")
     void testInsertProduct() {
         productDao.insertProduct(testProduct);
-        assertEquals(1, productDao.listProducts().size());
-        assertEquals(0, productDao.listProducts().get(0).getID());
-        assertEquals(testTrueProductName, productDao.listProducts().get(0).getName());
-        assertEquals(testTruePrice, productDao.listProducts().get(0).getPrice());
+        List<Product> testProducts = productDao.listProducts();
+
+        assertEquals(1, testProducts.size());
+        assertEquals(0, testProducts.get(0).getID());
+        assertEquals(testTrueProductName, testProducts.get(0).getName());
+        assertEquals(testTruePrice, testProducts.get(0).getPrice());
+        System.out.println(testProducts);
     }
 
     @Test
     @DisplayName("TEST-List: Products List is beautiful.")
     void listProducts() {
         productDao.insertProduct(testProduct);
-        assertEquals(1, productDao.listProducts().size());
-        assertEquals(0, productDao.listProducts().get(0).getID());
-        assertEquals(Arrays.asList(testProduct).toString(), productDao.listProducts().toString());
+        List<Product> testProducts = productDao.listProducts();
+
+        assertEquals(1, testProducts.size());
+        assertEquals(0, testProducts.get(0).getID());
+        assertEquals(Arrays.asList(testProduct).toString(), testProducts.toString());
     }
 
     @Test
     @DisplayName("TEST-ID: Products ID is beautiful.")
     void findProductById() {
         productDao.insertProduct(testProduct);
-        assertEquals(testProduct, productDao.findProductById(0));
+        Product testProductActual = productDao.findProductById(1);
+
+        assertEquals(1, testProductActual.getID());
+        assertEquals(testTrueProductName, testProductActual.getName());
+        assertEquals(testTruePrice, testProductActual.getPrice());
     }
 }
