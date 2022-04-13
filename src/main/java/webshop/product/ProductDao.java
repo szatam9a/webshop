@@ -37,6 +37,7 @@ public class ProductDao {
 
         return keyHolder.getKey().longValue();
     }
+
     public void insertProduct(Product product) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemp.update(con -> {
@@ -45,28 +46,32 @@ public class ProductDao {
                     Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, product.getName());
             stmt.setInt(2, product.getPrice());
-            stmt.setInt(3, product.getStock());
 
             return stmt;
         }, keyHolder);
     }
 
 // ELEGENDŐ a terméknevek listájával visszatérés, vagy termékek listájával? (pl.: vásárlásnál mindent lát, ha lekéri)
-    public List<Product> listProducts() {
-        return jdbcTemp.query(
-                        "SELECT name FROM products",
-                        this::mapRow).stream().toList());
-    }
+//    public List<Product> listProducts() {
+//        return jdbcTemp.query(
+//                        "SELECT name FROM products",
+//                        this::mapRow).stream().toList();
+//    }
 
     public Product findProductById(long id) {
-        return jdbcTemp.queryForObject(
-                "SELECT * FROM products" +
-                        " WHERE id = ?;",
-                (rs, rowNum) -> new Product(rs.getLong("id"),
-                        rs.getString("name"),
-                        rs.getInt("price"),
-                        rs.getInt("stock")),
-                id);
+        try {
+
+            return jdbcTemp.queryForObject(
+                    "SELECT * FROM products" +
+                            " WHERE id = ?;",
+                    (rs, rowNum) -> new Product(
+                            rs.getLong("id"),
+                            rs.getString("name"),
+                            rs.getInt("price"),
+                            id));
+        } catch (SQLException sqle) {
+            throw new IllegalStateException("No product found", sqle);
+        }
     }
 
     public void increasedProductStock(long id, int amount) {
