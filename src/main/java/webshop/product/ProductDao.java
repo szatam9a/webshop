@@ -60,17 +60,16 @@ public class ProductDao {
 
     public Product findProductById(long id) {
         try {
-
             return jdbcTemp.queryForObject(
                     "SELECT * FROM products" +
                             " WHERE id = ?;",
                     (rs, rowNum) -> new Product(
                             rs.getLong("id"),
                             rs.getString("name"),
-                            rs.getInt("price"),
-                            id));
-        } catch (SQLException sqle) {
-            throw new IllegalStateException("No product found", sqle);
+                            rs.getInt("price")),
+                            id);
+        } catch (Exception e) {
+            throw new IllegalStateException("No product found", e);
         }
     }
 
