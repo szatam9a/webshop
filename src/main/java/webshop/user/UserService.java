@@ -6,22 +6,28 @@ public class UserService {
     private UserDao userDao;
 //    private boolean loggedIn;
 
+
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
     public User findUserByID(long id) {
         return null;
     }
 
-    public void saveUser(String name, String email, String password) {
+
+    public boolean saveUser(String name, String email, String password) {
         User user = new User(name, email, password.hashCode());
-        if (hasUser(user)){
-            System.out.println("user already exist");
-            return;
+        if (hasUser(user)) {
+            return false;
         }
         userDao.saveUser(user);
+        return true;
     }
 
     public boolean hasUser(User user) {
-        Optional<User> userToCheck = Optional.of(userDao.findUserByEmail(user.getEmailAddress()));
-        if (userToCheck.isPresent()) {
+        User userToCheck = (userDao.findUserByEmail(user.getEmailAddress()));
+        if (userToCheck != null) {
             return true;
         }
         return false;
@@ -29,9 +35,9 @@ public class UserService {
 
 
     public boolean loginUser(User user) {
-        Optional<User> emailAccessUser = Optional.of(userDao.findUserByEmail(user.getEmailAddress()));
-        if (emailAccessUser.isPresent()) {
-            if (user.equals(emailAccessUser)) {
+        User emailAccessUser = userDao.findUserByEmail(user.getEmailAddress());
+        if (emailAccessUser != null) {
+            if (emailAccessUser.login(user)) {
                 user.setLoggedIn(true);
                 return true;
             }

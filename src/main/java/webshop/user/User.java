@@ -21,7 +21,6 @@ public class User {
         this.name = name;
         this.emailAddress = emailAddress;
         this.password = password;
-        this.shoppingCart = new LinkedList<>();
     }
 
     public User(String name, String emailAddress, long password) {
@@ -30,12 +29,11 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return getPassword() == user.getPassword() && Objects.equals(getEmailAddress(), user.getEmailAddress());
+    public boolean login(User user) {
+        if (user.emailAddress.equals(this.emailAddress) && user.password == this.password) {
+            return true;
+        }
+        return false;
     }
 
     public boolean isLoggedIn() {
@@ -46,10 +44,6 @@ public class User {
         this.loggedIn = loggedIn;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getEmailAddress(), getPassword());
-    }
 
     public int getID() {
         return ID;
