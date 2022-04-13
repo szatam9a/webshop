@@ -39,4 +39,10 @@ class UserDaoTest {
         long id = userDao.saveUser(new User("Name", "Email", "Password".hashCode()));
         System.out.println(userDao.findUserById(id));
     }
+
+    @Test
+    void saveUserTest2() {
+        long id = userDao.saveUser(new User("Name", "Email", "Password".hashCode()));
+        assertThrows(IllegalStateException.class, ()-> userDao.findUserById(3));
+    }
 }
