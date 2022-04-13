@@ -36,7 +36,7 @@ class ProductDaoTest {
     }
 
     @Test
-    @DisplayName("TEST-Create: Location-object is successfully. ")
+    @DisplayName("TEST-Create: Product-object is successfully. ")
     void testCreate() {
 
         Product product = new Product(testTrueProductName, testTrueInt);
