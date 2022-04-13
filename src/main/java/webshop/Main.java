@@ -3,6 +3,7 @@ package webshop;
 import org.flywaydb.core.Flyway;
 import org.mariadb.jdbc.MariaDbDataSource;
 import webshop.product.ProductDao;
+import webshop.user.User;
 import webshop.user.UserDao;
 
 import java.io.IOException;
@@ -76,7 +77,7 @@ public class Main {
         switch (selection) {
             case 1:
                 System.out.print("\n Kérem a regisztrálni kívánt nevet, e-mail címet, jelszót: ");
-                userDao.saveUser(scan.nextLine(), scan.nextLine(), scan.nextLine());
+                userDao.saveUser(new User(scan.nextLine(), scan.nextLine(), scan.nextLine().hashCode()));
                 break;
             case 2:
                 break;
