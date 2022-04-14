@@ -37,7 +37,7 @@ class UserDaoTest {
     @Test
     void saveUserTest() {
         long id = userDao.saveUser(new User("Name", "Email", "Password".hashCode()));
-        System.out.println(userDao.findUserById(id));
+        assertEquals(id,userDao.findUserById(id).getID());
     }
 
     @Test
