@@ -81,6 +81,7 @@ public class Controller {
                 loginUser(userToLogin);
                 break;
             case 3:
+                System.out.println("\n Kérem ");
                 break;
             case 4:
                 showProducts();
@@ -92,7 +93,7 @@ public class Controller {
             case 7:
                 break;
             case 8:
-                System.out.println("Kérem a feltöltendő lista-fájl abszolút elérési útvonalát: ");
+                System.out.println("Kérem a feltöltendő lista-fájl (abszolút) elérési útvonalát: ");
                 productService.loadProductFromFile(Path.of(scan.nextLine()));
                 System.out.println("Feltöltve...");
                 break;
@@ -105,6 +106,7 @@ public class Controller {
                 scan.nextLine();
                 break;
         }
+        scan.close();
     }
 
     private void showProducts() {
