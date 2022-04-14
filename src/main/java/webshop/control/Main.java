@@ -39,7 +39,7 @@ public class Main {
                 new OrderService(new OrderDao(dataSource)));
 
         try {
-            while (!mainController.terminated)
+            while (!mainController.isTerminated())
                 mainController.runMenu();
         } catch (
                 IOException ioe) {
