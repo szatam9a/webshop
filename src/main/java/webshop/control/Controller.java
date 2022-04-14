@@ -1,16 +1,14 @@
 package webshop.control;
 
 import webshop.order.OrderService;
+import webshop.product.Product;
 import webshop.product.ProductService;
 import webshop.user.User;
 import webshop.user.UserService;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Controller {
 
@@ -19,6 +17,7 @@ public class Controller {
     }
 
     private boolean terminated;
+    private Scanner scan = new Scanner(System.in);
     private User user;
     private ProductService productService;
     private UserService userService;
@@ -60,7 +59,6 @@ public class Controller {
     }
 
     public void runMenu() throws IOException {
-        Scanner scan = new Scanner(System.in);
         printMenu();
 
         int selection;
@@ -85,7 +83,7 @@ public class Controller {
             case 3:
                 break;
             case 4:
-                break;
+                showProducts();
             case 5:
                 System.out.print("\n Kérem a növelendő mennyiséget: ");
                 break;
@@ -109,16 +107,20 @@ public class Controller {
         }
     }
 
+    private void showProducts() {
+       
+    }
+
     private void saveUser(User userToLogin) {
         if (userService.saveUser(userToLogin.getName(), userToLogin.getEmailAddress(), userToLogin.getPassword())) {
-            user = new User(userService.findUserByEmail(userToLogin.getEmailAddress()));
+            user.copyUser(userService.findUserByEmail(userToLogin.getEmailAddress()));
             user.setLoggedIn(true);
         }
     }
 
     private void loginUser(User user) {
         if (userService.loginUser(user)) {
-            this.user = new User(userService.findUserByEmail(user.getEmailAddress()));
+            this.user.copyUser(userService.findUserByEmail(user.getEmailAddress()));
             this.user.setLoggedIn(true);
         }
     }

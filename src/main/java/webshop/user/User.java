@@ -4,9 +4,7 @@ import webshop.product.Product;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class User {
     private int ID;
@@ -14,9 +12,16 @@ public class User {
     private String emailAddress;
     private long password;
     private boolean loggedIn;
-    private List<Product> shoppingCart = new LinkedList<>();
+    private Map<Product,Integer> shoppingCart = new LinkedHashMap<>();
 
-    public User(User user) {
+    public Map<Product, Integer> getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(Map<Product, Integer> shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
+    public void copyUser(User user){
         this.ID = user.ID;
         this.name = user.name;
         this.emailAddress = user.emailAddress;
