@@ -24,13 +24,14 @@ public class Controller {
     private OrderService orderService;
 
     public Controller(ProductService productService, UserService userService, OrderService orderService) {
-        this.user = user = new User("","",0);
+        this.user = user = new User("", "", 0);
         this.productService = productService;
         this.userService = userService;
         this.orderService = orderService;
     }
+
     public void printMenu() {
-        if (user.isLoggedIn()){
+        if (user.isLoggedIn()) {
             System.out.println(user);
         }
         System.out.println("\n- Fagyöngytyúk WEBSHOP -\nKérem a kívánt funkcióhoz tartozó számot, és egy entert:");
@@ -64,7 +65,8 @@ public class Controller {
         switch (selection) {
             case 1:
                 System.out.print("\n Kérem a regisztrálni kívánt nevet, e-mail címet, jelszót: ");
-                userService.saveUser(scan.nextLine(), scan.nextLine(), scan.nextLine());
+                User userToLogin = new User(scan.nextLine(), scan.nextLine(), scan.nextLine().hashCode());
+                saveUser(userToLogin);
                 break;
             case 2:
                 break;
@@ -89,9 +91,16 @@ public class Controller {
                 terminated = true;
                 break;
             default:
-                System.out.println("Itt nincs ilyen: " +selection+ " menüszám, kérem próbálkozzon újra. ");
+                System.out.println("Itt nincs ilyen: " + selection + " menüszám, kérem próbálkozzon újra. ");
                 scan.nextLine();
                 break;
+        }
+    }
+
+    private void saveUser(User userToLogin) {
+        if (userService.saveUser(userToLogin.getName(), userToLogin.getEmailAddress(), userToLogin.getPassword())) {
+            user = new User(userService.findUserByEmail(userToLogin.getEmailAddress()));
+            user.setLoggedIn(true);
         }
     }
 }

@@ -41,27 +41,27 @@ class UserServiceTest {
 
     @Test
     void saveUserTest() {
-        userService.saveUser("joe", "joe", "joe");
-        userService.saveUser("joe", "joee", "joe");
-        userService.saveUser("joe", "joeee", "joe");
-        userService.saveUser("joe", "joeeee", "joee");
+        userService.saveUser("joe", "joe", "joe".hashCode());
+        userService.saveUser("joe", "joee", "joe".hashCode());
+        userService.saveUser("joe", "joeee", "joe".hashCode());
+        userService.saveUser("joe", "joeeee", "joee".hashCode());
     }
 
     @Test
     void hasUserTest() {
-        userService.saveUser("joe", "joe", "joe");
-        assertEquals(false, userService.saveUser("joe", "joe", "joe"));
+        userService.saveUser("joe", "joe", "joe".hashCode());
+        assertEquals(false, userService.saveUser("joe", "joe", "joe".hashCode()));
     }
 
     @Test
     void loginUserTestSuccess() {
-        userService.saveUser("name", "email", "pass");
+        userService.saveUser("name", "email", "pass".hashCode());
         assertEquals(true, userService.loginUser(new User("name", "email", "pass".hashCode())));
     }
 
     @Test
     void loginUserTestFail() {
-        userService.saveUser("joe", "joe", "joe");
+        userService.saveUser("joe", "joe", "joe".hashCode());
         assertEquals(false, userService.loginUser(new User("name", "email", "pas".hashCode())));
         assertEquals(false, userService.loginUser(new User("name", "emai", "pass".hashCode())));
     }

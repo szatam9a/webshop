@@ -16,6 +16,14 @@ public class User {
     private boolean loggedIn;
     private List<Product> shoppingCart = new LinkedList<>();
 
+    public User(User user) {
+        this.ID = user.ID;
+        this.name = user.name;
+        this.emailAddress = user.emailAddress;
+        this.password = user.password;
+        this.loggedIn= user.loggedIn;
+    }
+
     public User(int ID, String name, String emailAddress, long password) {
         this.ID = ID;
         this.name = name;

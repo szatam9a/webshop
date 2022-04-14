@@ -15,8 +15,8 @@ public class UserService {
     }
 
 
-    public boolean saveUser(String name, String email, String password) {
-        User user = new User(name, email, password.hashCode());
+    public boolean saveUser(String name, String email, long password) {
+        User user = new User(name, email, password);
         if (hasUser(user)) {
             return false;
         }
@@ -31,7 +31,13 @@ public class UserService {
         }
         return false;
     }
-
+    public User findUserByEmail(String email){
+        User user = userDao.findUserByEmail(email);
+        if (user!= null){
+            return user;
+        }
+        throw  new IllegalArgumentException("no user");
+    }
 
     public boolean loginUser(User user) {
         User emailAccessUser = userDao.findUserByEmail(user.getEmailAddress());
@@ -43,4 +49,5 @@ public class UserService {
         }
         return false;
     }
+
 }
