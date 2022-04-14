@@ -39,4 +39,7 @@ public class ProductService {
                 new Product(elements[0], Integer.parseInt(elements[1]))
         );
     }
+
+    public void listProducts() {
+    }
 }
