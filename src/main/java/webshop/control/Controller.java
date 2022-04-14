@@ -91,6 +91,7 @@ public class Controller {
             case 6:
                 break;
             case 7:
+                productService.listProducts();
                 break;
             case 8:
                 System.out.println("Kérem a feltöltendő lista-fájl (abszolút) elérési útvonalát: ");
