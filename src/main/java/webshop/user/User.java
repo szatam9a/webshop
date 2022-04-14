@@ -14,7 +14,7 @@ public class User {
     private String emailAddress;
     private long password;
     private boolean loggedIn;
-    private List<Product> shoppingCart;
+    private List<Product> shoppingCart = new LinkedList<>();
 
     public User(int ID, String name, String emailAddress, long password) {
         this.ID = ID;
