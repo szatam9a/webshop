@@ -35,7 +35,7 @@ public class Controller {
         System.out.println("\n- Fagyöngytyúk WEBSHOP -\n");
 
         if (user.isLoggedIn()) {
-            System.out.println(user);1
+            System.out.println(user);
         }
         System.out.println("Kérem a kívánt funkcióhoz tartozó számot, és egy entert:");
 
