@@ -32,7 +32,7 @@ public class Controller {
 
     public void printMenu() {
 
-        System.out.println("\n- Fagyöngytyúk WEBSHOP -\n");
+        System.out.println("\n-= Fagyöngytyúk WEBSHOP =-\n");
 
         if (user.isLoggedIn()) {
             System.out.println(user);
