@@ -8,6 +8,7 @@ import webshop.user.UserService;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -39,17 +40,20 @@ public class Controller {
         }
         System.out.println("\nKérem a kívánt funkcióhoz tartozó számot, és egy entert:");
 
-        List<String> menuWebshop = Arrays.asList(
+        List<String> menuWebshop = new LinkedList<>(Arrays.asList(
                 "1. Felhasználó regisztráció",
                 "2. Felhasználó bejelentkezés",
                 "3. Termék kosárba helyezése",
                 "4. Termék kosárból kivétele",
                 "5. Termék mennyiség növelése",
                 "6. Rendelés leadása",
-                "7. Termékek listázása fájlból",
-                "8. Termékek betöltése fájlból",
+                "7. Termékek listázása",
                 "9. Kilépés \n"
-        );
+        ));
+        if (user.isLoggedIn()) {
+            menuWebshop.remove(0);
+            menuWebshop.remove(0);
+        }
         for (String item : menuWebshop) {
             System.out.println(item);
         }
@@ -65,14 +69,18 @@ public class Controller {
         } catch (NumberFormatException nfe) {
             selection = 0;
         }
-
+        User userToLogin;
+        userService.saveUser("joe", "joe", "joe".hashCode());
         switch (selection) {
             case 1:
                 System.out.print("\n Kérem a regisztrálni kívánt nevet, e-mail címet, jelszót: ");
-                User userToLogin = new User(scan.nextLine(), scan.nextLine(), scan.nextLine().hashCode());
+                userToLogin = new User(scan.nextLine(), scan.nextLine(), scan.nextLine().hashCode());
                 saveUser(userToLogin);
                 break;
             case 2:
+                System.out.print("\n Kérem a regisztrálni kívánt , e-mail címet, jelszót: ");
+                userToLogin = new User("", scan.nextLine(), scan.nextLine().hashCode());
+                loginUser(userToLogin);
                 break;
             case 3:
                 break;
