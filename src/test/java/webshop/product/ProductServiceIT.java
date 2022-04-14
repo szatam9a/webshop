@@ -8,6 +8,7 @@ import org.mariadb.jdbc.MariaDbDataSource;
 
 import java.nio.file.Path;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -63,5 +64,16 @@ class ProductServiceIT {
                 assertThrows(IllegalArgumentException.class,
                         () -> productService.loadProductFromFile(Path.of("THE HITCHHIKER'S GUIDE TO THE GALAXY")));
         assertEquals("Cannot open file for read!", iae.getMessage());
+    }
+
+    @Test
+    @DisplayName("TEST-List: Products List is beautiful.")
+    void testListProducts() {
+        productDao.insertProduct(testProduct);
+        List<Product> testProducts = productDao.listProducts();
+
+        assertEquals(1, testProducts.size());
+        assertEquals(0, testProducts.get(0).getID());
+        assertEquals(List.of(testProduct).toString(), testProducts.toString());
     }
 }
