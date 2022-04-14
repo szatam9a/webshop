@@ -37,7 +37,7 @@ public class Controller {
         if (user.isLoggedIn()) {
             System.out.println(user);
         }
-        System.out.println("Kérem a kívánt funkcióhoz tartozó számot, és egy entert:");
+        System.out.println("\nKérem a kívánt funkcióhoz tartozó számot, és egy entert:");
 
         List<String> menuWebshop = Arrays.asList(
                 "1. Felhasználó regisztráció",
