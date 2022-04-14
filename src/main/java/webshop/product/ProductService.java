@@ -41,5 +41,6 @@ public class ProductService {
     }
 
     public void listProducts() {
+        productDao.listProducts();
     }
 }
