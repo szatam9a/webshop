@@ -62,7 +62,7 @@ public class Main {
     }
 
     public void printMenu() {
-        System.out.println("\n- Műanyag üveggyöngy WEBSHOP -\nKérem a kívánt funkcióhoz tartozó számot, és egy entert:");
+        System.out.println("\n- Fagyöngytyúk WEBSHOP -\nKérem a kívánt funkcióhoz tartozó számot, és egy entert:");
         List<String> menuWebshop = Arrays.asList(
                 "1. Felhasználó regisztráció",
                 "2. Felhasználó bejelentkezés",
