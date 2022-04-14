@@ -30,6 +30,9 @@ public class Controller {
         this.orderService = orderService;
     }
     public void printMenu() {
+        if (user.isLoggedIn()){
+            System.out.println(user);
+        }
         System.out.println("\n- Fagyöngytyúk WEBSHOP -\nKérem a kívánt funkcióhoz tartozó számot, és egy entert:");
         List<String> menuWebshop = Arrays.asList(
                 "1. Felhasználó regisztráció",

@@ -77,4 +77,11 @@ public class User {
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                '}';
+    }
 }
