@@ -17,7 +17,7 @@ class UserDaoTest {
     UserDao userDao;
 
     @BeforeEach
-    /*void init() {
+    void init() {
         MariaDbDataSource dataSource = new MariaDbDataSource();
         try {
             dataSource.setUrl("jdbc:mariadb://localhost:3306/webshop?useUnicode=true");
@@ -32,7 +32,7 @@ class UserDaoTest {
         flyway.migrate();
 
         userDao = new UserDao(dataSource);
-    }*/
+    }
 
     @Test
     void saveUserTest() {

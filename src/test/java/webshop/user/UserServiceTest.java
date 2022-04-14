@@ -16,7 +16,7 @@ class UserServiceTest {
     UserService userService;
 
     @BeforeEach
-    /*void init() {
+    void init() {
         MariaDbDataSource dataSource = new MariaDbDataSource();
         try {
             dataSource.setUrl("jdbc:mariadb://localhost:3306/webshop?useUnicode=true");
@@ -32,7 +32,7 @@ class UserServiceTest {
 
         userDao = new UserDao(dataSource);
         userService = new UserService(userDao);
-    }*/
+    }
 
     @Test
     void findUserByIDTest() {

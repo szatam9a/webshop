@@ -4,7 +4,6 @@ import java.util.Optional;
 
 public class UserService {
     private UserDao userDao;
-//    private boolean loggedIn;
 
 
     public UserService(UserDao userDao) {
