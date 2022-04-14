@@ -58,18 +58,7 @@ class ProductDaoTest {
         System.out.println(testProducts);
     }
 
-    @Test
-    @DisplayName("TEST-List: Products List is beautiful.")
-    void testListProducts() {
-        productDao.insertProduct(testProduct);
-        List<Product> testProducts = productDao.listProducts();
-
-        assertEquals(1, testProducts.size());
-        assertEquals(0, testProducts.get(0).getID());
-        assertEquals(Arrays.asList(testProduct).toString(), testProducts.toString());
-    }
-
-    @Test
+      @Test
     @DisplayName("TEST-ID: Products ID is beautiful.")
     void testFindProductById() {
         productDao.insertProduct(testProduct);
