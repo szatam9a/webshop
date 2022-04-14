@@ -38,7 +38,7 @@ public class Controller {
             System.out.println(user);
         }
         System.out.println("Kezit csókolom, Idösanyám aztat kérdezteti, hogy gyött-é tokaszalonna," +
-                " ha akad némi ideje kérem a kívánt funkcióhoz tartozó számot, és egy entert:");
+                "\nha akad némi ideje kérem a kívánt funkcióhoz tartozó számot, és egy entert:");
 
         List<String> menuWebshop = new LinkedList<>(Arrays.asList(
                 "1. Felhasználó regisztráció",
