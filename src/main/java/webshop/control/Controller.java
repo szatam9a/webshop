@@ -85,6 +85,7 @@ public class Controller {
                 break;
             case 4:
                 showProducts();
+                break;
             case 5:
                 System.out.print("\n Kérem a növelendő mennyiséget: ");
                 break;
@@ -110,7 +111,9 @@ public class Controller {
     }
 
     private void showProducts() {
-       
+        for (Map.Entry<Product, Integer> entry : user.getShoppingCart().entrySet()) {
+            System.out.println(entry);
+        }
     }
 
     private void saveUser(User userToLogin) {
