@@ -31,10 +31,14 @@ public class Controller {
     }
 
     public void printMenu() {
+
+        System.out.println("\n- Fagyöngytyúk WEBSHOP -\n");
+
         if (user.isLoggedIn()) {
-            System.out.println(user);
+            System.out.println(user);1
         }
-        System.out.println("\n- Fagyöngytyúk WEBSHOP -\nKérem a kívánt funkcióhoz tartozó számot, és egy entert:");
+        System.out.println("Kérem a kívánt funkcióhoz tartozó számot, és egy entert:");
+
         List<String> menuWebshop = Arrays.asList(
                 "1. Felhasználó regisztráció",
                 "2. Felhasználó bejelentkezés",
@@ -101,6 +105,13 @@ public class Controller {
         if (userService.saveUser(userToLogin.getName(), userToLogin.getEmailAddress(), userToLogin.getPassword())) {
             user = new User(userService.findUserByEmail(userToLogin.getEmailAddress()));
             user.setLoggedIn(true);
+        }
+    }
+
+    private void loginUser(User user) {
+        if (userService.loginUser(user)) {
+            this.user = new User(userService.findUserByEmail(user.getEmailAddress()));
+            this.user.setLoggedIn(true);
         }
     }
 }
