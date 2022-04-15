@@ -29,6 +29,11 @@ public class User {
         this.loggedIn= user.loggedIn;
     }
 
+    public User(String emailAddress, String password) {
+        this.emailAddress = emailAddress;
+        this.password = password.hashCode();
+    }
+
     public User(int ID, String name, String emailAddress, long password) {
         this.ID = ID;
         this.name = name;

@@ -1,24 +1,23 @@
-package webshop.user;
+package webshop.order;
 
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mariadb.jdbc.MariaDbDataSource;
 
-import javax.sql.DataSource;
-
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserDaoTest {
+class OrderDaoTest {
 
-    Flyway flyway;
-    UserDao userDao;
+    OrderDao orderDao;
 
     @BeforeEach
     void init() {
         MariaDbDataSource dataSource = new MariaDbDataSource();
+        orderDao = new OrderDao(dataSource);
         try {
             dataSource.setUrl("jdbc:mariadb://localhost:3306/webshop?useUnicode=true");
             dataSource.setUser("webshops");
@@ -27,22 +26,18 @@ class UserDaoTest {
             throw new IllegalStateException("Cannot reach DataBase!", sqle);
         }
 
-        flyway = Flyway.configure().dataSource(dataSource).load();
+        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
         flyway.clean();
         flyway.migrate();
-
-        userDao = new UserDao(dataSource);
     }
 
     @Test
-    void saveUserTest() {
-        long id = userDao.saveUser(new User("Name", "Email", "Password".hashCode()));
-        assertEquals(id,userDao.findUserById(id).getID());
+    void testInsertOrder() {
+        orderDao.insertOrder(11, LocalDate.of(2022, 01, 12));
+        Order order = orderDao.findOrderByUserId(11);
+        assertEquals(11, order.getUserId());
+        assertEquals(2022, order.getDate().getYear());
     }
 
-    @Test
-    void saveUserTest2() {
-        long id = userDao.saveUser(new User("Name", "Email", "Password".hashCode()));
-        assertThrows(IllegalStateException.class, ()-> userDao.findUserById(3));
-    }
+
 }

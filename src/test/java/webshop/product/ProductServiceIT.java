@@ -31,8 +31,8 @@ class ProductServiceIT {
 
         try {
             dataSource.setUrl("jdbc:mariadb://localhost:3306/webshop?useUnicode=true");
-            dataSource.setUser("root");
-            dataSource.setPassword("root");
+            dataSource.setUser("webshops");
+            dataSource.setPassword("webshops");
         } catch (SQLException sqle) {
             throw new IllegalStateException("Cannot reach DataBase!", sqle);
         }

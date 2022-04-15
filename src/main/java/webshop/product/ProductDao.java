@@ -1,15 +1,16 @@
-package webshop.product;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
+       package webshop.product;
 
-import javax.sql.DataSource;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.List;
+        import org.springframework.jdbc.core.JdbcTemplate;
+        import org.springframework.jdbc.support.GeneratedKeyHolder;
+        import org.springframework.jdbc.support.KeyHolder;
+
+        import javax.sql.DataSource;
+        import java.sql.PreparedStatement;
+        import java.sql.ResultSet;
+        import java.sql.SQLException;
+        import java.sql.Statement;
+        import java.util.List;
 
 public class ProductDao {
 
@@ -86,3 +87,4 @@ public class ProductDao {
                 rs.getInt("price"));
     }
 }
+
