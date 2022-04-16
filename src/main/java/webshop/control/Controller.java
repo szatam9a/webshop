@@ -30,6 +30,10 @@ public class Controller {
         this.orderService = orderService;
     }
 
+    public void initProductTable() {
+        productService.loadProductFromFile(Path.of("src/test/resources/TEST_Products.csv"));
+    }
+
     public void printMenu() {
 
         System.out.println("\n-= Fagyöngytyúk WEBSHOP =-\n");
@@ -69,16 +73,22 @@ public class Controller {
             selection = 0;
         }
         User userToLogin;
-        userService.saveUser("joe", "joe", "joe".hashCode());
+       // userService.saveUser("joe", "joe", "joe".hashCode());
         switch (selection) {
             case 1:
                 System.out.print("\n Kérem a regisztrálni kívánt nevet, e-mail címet, jelszót: ");
-                userToLogin = new User(scan.nextLine(), scan.nextLine(), scan.nextLine().hashCode());
+                String name = scan.nextLine();
+                String email= scan.nextLine();
+                int password = scan.nextLine().hashCode();
+                userToLogin = new User(name, email, password);
                 saveUser(userToLogin);
                 break;
             case 2:
-                System.out.print("\n Kérem a regisztrálni kívánt , e-mail címet, jelszót: ");
-                userToLogin = new User("", scan.nextLine(), scan.nextLine().hashCode());
+                System.out.print("\n Kérem az email címed: ");
+                String emailt = scan.nextLine();
+                System.out.print("\n Kérem a jelszót: ");
+                String passwordt = scan.nextLine();
+                userToLogin = new User(emailt, passwordt);
                 loginUser(userToLogin);
                 break;
             case 3:
@@ -129,6 +139,10 @@ public class Controller {
         if (userService.loginUser(user)) {
             this.user.copyUser(userService.findUserByEmail(user.getEmailAddress()));
             this.user.setLoggedIn(true);
+            System.out.println("User be van lépve");
+        } else {
+            this.user.setLoggedIn(false);
+            System.out.println("User nincs belépve");
         }
     }
 }

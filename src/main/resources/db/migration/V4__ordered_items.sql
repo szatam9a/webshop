@@ -1,1 +1,1 @@
-create table oredered_items(id bigint not null auto_increment, order_id bigint, product_id bigint, primary key (id));
+create table oredered_items(order_id bigint, product_id bigint);

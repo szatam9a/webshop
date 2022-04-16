@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    private final Scanner scan = new Scanner(System.in);
+    //private final Scanner scan = new Scanner(System.in);
 
 
     public static void main(String[] args) {
@@ -31,16 +31,17 @@ public class Main {
         }
 
         Flyway flyway = Flyway.configure().dataSource(dataSource).load();
-        flyway.clean();
+        //flyway.clean();
         flyway.migrate();
 
         Controller mainController = new Controller(new ProductService(new ProductDao(dataSource)),
                 new UserService(new UserDao(dataSource)),
                 new OrderService(new OrderDao(dataSource)));
 
+        mainController.initProductTable();
 
         try {
-            while (!mainController.isTerminated())
+            //while (!mainController.isTerminated())
                 mainController.runMenu();
         } catch (
                 IOException ioe) {
