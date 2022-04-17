@@ -92,13 +92,16 @@ public class Controller {
                 loginUser(userToLogin);
                 break;
             case 3:
-                productService.listProducts();
+                productService.listProducts().stream().forEach(System.out::println);
                 System.out.println("\n Kérem az termék id-ját");
                 String prodID = scan.nextLine();
                 addToCart(prodID);
                 break;
             case 4:
                 showProducts();
+                System.out.println("\n Kérem az termék id-ját");
+                String prodToRemove = scan.nextLine();
+                removeFromCart(prodToRemove);
                 break;
             case 5:
                 System.out.print("\n Kérem a növelendő mennyiséget: ");
@@ -107,7 +110,7 @@ public class Controller {
                 checkThenOrder();
                 break;
             case 7:
-                productService.listProducts();
+                productService.listProducts().stream().forEach(System.out::println);
                 break;
             case 8:
                 System.out.println("Kérem a feltöltendő lista-fájl (abszolút) elérési útvonalát: ");
@@ -123,6 +126,10 @@ public class Controller {
                 scan.nextLine();
                 break;
         }
+    }
+
+    private void removeFromCart(String prodToRemove) {
+        user.getShoppingCart().remove(new Product(Integer.parseInt(prodToRemove), "", 0));
     }
 
     private void checkThenOrder() {

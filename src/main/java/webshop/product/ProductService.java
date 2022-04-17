@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 public class ProductService {
 
@@ -40,8 +41,8 @@ public class ProductService {
         );
     }
 
-    public void listProducts() {
-        productDao.listProducts().stream().forEach(System.out::println);
+    public List <Product> listProducts() {
+        return productDao.listProducts();
     }
 
     public Product findProductByName(String name) {
