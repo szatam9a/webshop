@@ -67,8 +67,8 @@ public class User {
     public void addToCart(Product product) {
         if (shoppingCart.containsKey(product)) {
             shoppingCart.put(product, shoppingCart.get(product) + 1);
-        }
-        shoppingCart.put(product, 1);
+        } else
+            shoppingCart.put(product, 1);
     }
 
     public boolean isLoggedIn() {

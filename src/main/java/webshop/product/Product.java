@@ -1,5 +1,7 @@
 package webshop.product;
 
+import java.util.Objects;
+
 public class Product {
 
     private final long id;
@@ -44,4 +46,16 @@ public class Product {
 //        return stock;
 //    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product product = (Product) o;
+        return id == product.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
