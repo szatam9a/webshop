@@ -128,6 +128,8 @@ public class Controller {
     private void checkThenOrder() {
         if (user.isLoggedIn()) {
             orderService.saveOrder(user);
+            System.out.println("rendelés leadva ty.");
+            user.setShoppingCart(new LinkedHashMap<>());
         } else {
             System.out.println("you need to login to order");
         }
