@@ -73,12 +73,12 @@ public class Controller {
             selection = 0;
         }
         User userToLogin;
-       // userService.saveUser("joe", "joe", "joe".hashCode());
+        userService.saveUser("joe", "joe", "joe".hashCode()); // user to test login and shopping bcs flyway clean the database at start.
         switch (selection) {
             case 1:
                 System.out.print("\n Kérem a regisztrálni kívánt nevet, e-mail címet, jelszót: ");
                 String name = scan.nextLine();
-                String email= scan.nextLine();
+                String email = scan.nextLine();
                 int password = scan.nextLine().hashCode();
                 userToLogin = new User(name, email, password);
                 saveUser(userToLogin);
@@ -92,7 +92,10 @@ public class Controller {
                 loginUser(userToLogin);
                 break;
             case 3:
-                System.out.println("\n Kérem ");
+                productService.listProducts();
+                System.out.println("\n Kérem az termék id-ját");
+                String prodID = scan.nextLine();
+                addToCart(prodID);
                 break;
             case 4:
                 showProducts();
@@ -101,6 +104,7 @@ public class Controller {
                 System.out.print("\n Kérem a növelendő mennyiséget: ");
                 break;
             case 6:
+                checkThenOrder();
                 break;
             case 7:
                 productService.listProducts();
@@ -119,7 +123,24 @@ public class Controller {
                 scan.nextLine();
                 break;
         }
-        scan.close();
+    }
+
+    private void checkThenOrder() {
+        if (user.isLoggedIn()) {
+            orderService.saveOrder(user);
+        } else {
+            System.out.println("you need to login to order");
+        }
+    }
+
+    private void addToCart(String prodID) {
+        try {
+            Product toAdd = productService.findProductById(Integer.parseInt(prodID));
+            if (toAdd != null) user.addToCart(toAdd);
+        } catch (Exception e) {
+            System.out.println("id kell");
+        }
+
     }
 
     private void showProducts() {

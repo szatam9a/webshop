@@ -12,7 +12,7 @@ public class User {
     private String emailAddress;
     private long password;
     private boolean loggedIn;
-    private Map<Product,Integer> shoppingCart = new LinkedHashMap<>();
+    private Map<Product, Integer> shoppingCart = new LinkedHashMap<>();
 
     public Map<Product, Integer> getShoppingCart() {
         return shoppingCart;
@@ -21,12 +21,13 @@ public class User {
     public void setShoppingCart(Map<Product, Integer> shoppingCart) {
         this.shoppingCart = shoppingCart;
     }
-    public void copyUser(User user){
+
+    public void copyUser(User user) {
         this.ID = user.ID;
         this.name = user.name;
         this.emailAddress = user.emailAddress;
         this.password = user.password;
-        this.loggedIn= user.loggedIn;
+        this.loggedIn = user.loggedIn;
     }
 
     public User(String emailAddress, String password) {
@@ -52,6 +53,22 @@ public class User {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", shoppingCart=" + shoppingCart +
+                '}';
+    }
+
+    public void addToCart(Product product) {
+        if (shoppingCart.containsKey(product)) {
+            shoppingCart.put(product, shoppingCart.get(product) + 1);
+        }
+        shoppingCart.put(product, 1);
     }
 
     public boolean isLoggedIn() {
@@ -95,11 +112,4 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
-                '}';
-    }
 }

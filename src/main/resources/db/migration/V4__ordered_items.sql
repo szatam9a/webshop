@@ -1,1 +1,1 @@
-create table oredered_items(order_id bigint, product_id bigint);
+create table ordered_items(order_id bigint, product_id bigint, pieces int);

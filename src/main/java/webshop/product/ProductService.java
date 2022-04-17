@@ -41,6 +41,25 @@ public class ProductService {
     }
 
     public void listProducts() {
-        productDao.listProducts();
+        productDao.listProducts().stream().forEach(System.out::println);
+    }
+
+    public Product findProductByName(String name) {
+        Product product = productDao.findProductByName(name);
+        if (product != null) {
+            return product;
+        } else {
+            System.out.println("no such termék");
+            return null;
+        }
+    }
+    public Product findProductById(int id) {
+        Product product = productDao.findProductById(id);
+        if (product != null) {
+            return product;
+        } else {
+            System.out.println("no such termék");
+            return null;
+        }
     }
 }

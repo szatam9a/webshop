@@ -14,6 +14,7 @@ public class Product {
 //        this.stock = stock;
     }
 
+
     public Product(String name, int price) {
         this(0, name, price);
     }

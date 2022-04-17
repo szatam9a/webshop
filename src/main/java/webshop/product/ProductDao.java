@@ -72,6 +72,20 @@ public class ProductDao {
             throw new IllegalStateException("No product found", e);
         }
     }
+    public Product findProductByName(String name) {
+        try {
+            return jdbcTemp.queryForObject(
+                    "SELECT * FROM products" +
+                            " WHERE name = ?;",
+                    (rs, rowNum) -> new Product(
+                            rs.getLong("id"),
+                            rs.getString("name"),
+                            rs.getInt("price")),
+                    name);
+        } catch (Exception e) {
+            throw new IllegalStateException("No product found", e);
+        }
+    }
 
 //    public void increasedProductStock(long id, int amount) {
 //        jdbcTemp.update(
@@ -83,8 +97,10 @@ public class ProductDao {
 
     private Product mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new Product(
+                rs.getLong("id"),
                 rs.getString("name"),
                 rs.getInt("price"));
+
     }
 }
 
