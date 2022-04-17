@@ -10,6 +10,7 @@ public class OrderService {
     }
 
     public void saveOrder(User user) {
-        orderDao.saveOrder(user);
+        long id = orderDao.saveOrder(user);
+        orderDao.saveOrderedItems(user, id);
     }
 }
