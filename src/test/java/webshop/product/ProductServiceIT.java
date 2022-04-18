@@ -62,7 +62,8 @@ class ProductServiceIT {
     void testWrongLoadProductFromFile() {
         IllegalArgumentException iae =
                 assertThrows(IllegalArgumentException.class,
-                        () -> productService.loadProductFromFile(Path.of("THE HITCHHIKER'S GUIDE TO THE GALAXY")));
+                        () -> productService.loadProductFromFile(
+                                Path.of("THE HITCHHIKER'S GUIDE TO THE GALAXY")));
         assertEquals("Cannot open file for read!", iae.getMessage());
     }
 

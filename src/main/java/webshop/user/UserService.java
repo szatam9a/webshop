@@ -37,7 +37,7 @@ public class UserService {
         if (user!= null){
             return user;
         }
-        throw  new IllegalArgumentException("no user");
+        throw new IllegalArgumentException("no user: "+email);
     }
 
     public boolean loginUser(User user) {

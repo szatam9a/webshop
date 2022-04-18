@@ -28,7 +28,6 @@ public class ProductService {
             while (br.ready()) {
                 addProductFromLine(br.readLine());
             }
-
         } catch (IOException e) {
             throw new IllegalArgumentException("Cannot open file for read!", e);
         }
@@ -50,7 +49,7 @@ public class ProductService {
         if (product != null) {
             return product;
         } else {
-            System.out.println("no such termék");
+            System.out.println("no such termék: "+name);
             return null;
         }
     }
@@ -59,7 +58,7 @@ public class ProductService {
         if (product != null) {
             return product;
         } else {
-            System.out.println("no such termék");
+            System.out.println("no such termék: "+id);
             return null;
         }
     }
