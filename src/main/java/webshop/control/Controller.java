@@ -73,7 +73,6 @@ public class Controller {
             selection = 0;
         }
         User userToLogin;
-        userService.saveUser("joe", "joe", "joe".hashCode()); // user to test login and shopping bcs flyway clean the database at start.
         switch (selection) {
             case 1:
                 System.out.print("\n Kérem a regisztrálni kívánt nevet, e-mail címet, jelszót: ");
