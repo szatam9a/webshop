@@ -48,12 +48,6 @@ class UserServiceTest {
     }
 
     @Test
-    void hasUserTest() {
-        userService.saveUser("joe", "joe", "joe".hashCode());
-        assertEquals(false, userService.saveUser("joe", "joe", "joe".hashCode()));
-    }
-
-    @Test
     void loginUserTestSuccess() {
         userService.saveUser("name", "email", "pass".hashCode());
         assertEquals(true, userService.loginUser(new User("name", "email", "pass".hashCode())));
@@ -64,5 +58,14 @@ class UserServiceTest {
         userService.saveUser("joe", "joe", "joe".hashCode());
         assertEquals(false, userService.loginUser(new User("name", "email", "pas".hashCode())));
         assertEquals(false, userService.loginUser(new User("name", "emai", "pass".hashCode())));
+    }
+    @Test
+    void registeringTheUserSuccess(){
+        assertEquals(true, userService.saveUser("joe", "joee", "joe".hashCode()));
+    }
+    @Test
+    void registeringTheUserFail(){
+        userService.saveUser("joe", "joe", "joe".hashCode());
+        assertEquals(false, userService.saveUser("joe", "joe", "joe".hashCode()));
     }
 }

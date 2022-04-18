@@ -18,6 +18,7 @@ public class UserService {
     public boolean saveUser(String name, String email, long password) {
         User user = new User(name, email, password);
         if (hasUser(user)) {
+            System.out.println("the email address is already registered");
             return false;
         }
         userDao.saveUser(user);
