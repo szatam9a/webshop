@@ -37,12 +37,12 @@ class UserDaoTest {
     @Test
     void saveUserTest() {
         long id = userDao.saveUser(new User("Name", "Email", "Password".hashCode()));
-        assertEquals(id,userDao.findUserById(id).getID());
+        assertEquals(id,userDao.findUserById(id).get().getID());
     }
 
     @Test
     void saveUserTest2() {
         long id = userDao.saveUser(new User("Name", "Email", "Password".hashCode()));
-        assertThrows(IllegalStateException.class, ()-> userDao.findUserById(3));
+        assertEquals(false, userDao.findUserById(3).isPresent());
     }
 }

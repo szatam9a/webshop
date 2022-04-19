@@ -35,36 +35,36 @@ public class UserDao {
         return keyHolder.getKey().longValue();
     }
 
-    public User findUserById(long id) {
+    public Optional<User> findUserById(long id) {
         try {
-            return ((jdbcTemplate.queryForObject("select * from users where user_id = ?",
+            return Optional.of((jdbcTemplate.queryForObject("select * from users where user_id = ?",
                     (rs, rowNum) -> new User(rs.getInt("user_id"), rs.getString("name"),
                             rs.getString("email"), (rs.getLong("password")))
                     , id)));
         } catch (Exception e) {
-            throw new IllegalStateException("no user", e);
+            return Optional.empty();
         }
     }
 
-    public User findUserByName(String name) {
+    public Optional<User> findUserByName(String name) {
         try {
-            return (jdbcTemplate.queryForObject("select * from users where name = ?",
+            return Optional.of(jdbcTemplate.queryForObject("select * from users where name = ?",
                     (rs, rowNum) -> new User(rs.getInt("user_id"), rs.getString("name"),
                             rs.getString("email"), (rs.getLong("password")))
                     , name));
         } catch (Exception e) {
-            return null;
+            return Optional.empty();
         }
     }
 
-    public User findUserByEmail(String email) {
+    public Optional<User> findUserByEmail(String email) {
         try {
-            return (jdbcTemplate.queryForObject("select * from users where email = ?",
+            return Optional.of(jdbcTemplate.queryForObject("select * from users where email = ?",
                     (rs, rowNum) -> new User(rs.getInt("user_id"), rs.getString("name"),
                             rs.getString("email"), (rs.getLong("password")))
                     , email));
         } catch (Exception e) {
-            return null;
+            return Optional.empty();
         }
     }
 

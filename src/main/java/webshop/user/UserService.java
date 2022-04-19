@@ -26,24 +26,25 @@ public class UserService {
     }
 
     public boolean hasUser(User user) {
-        User userToCheck = (userDao.findUserByEmail(user.getEmailAddress()));
-        if (userToCheck != null) {
+        Optional<User> userToCheck = (userDao.findUserByEmail(user.getEmailAddress()));
+        if (userToCheck.isPresent()) {
             return true;
         }
         return false;
     }
-    public User findUserByEmail(String email){
-        User user = userDao.findUserByEmail(email);
-        if (user!= null){
-            return user;
+
+    public User findUserByEmail(String email) {
+        Optional<User> user = userDao.findUserByEmail(email);
+        if (user.isPresent()) {
+            return user.get();
         }
-        throw  new IllegalArgumentException("no user");
+        throw new IllegalArgumentException("no user");
     }
 
     public boolean loginUser(User user) {
-        User emailAccessUser = userDao.findUserByEmail(user.getEmailAddress());
-        if (emailAccessUser != null) {
-            if (emailAccessUser.login(user)) {
+        Optional<User> emailAccessUser = userDao.findUserByEmail(user.getEmailAddress());
+        if (emailAccessUser.isPresent()) {
+            if (emailAccessUser.get().login(user)) {
                 user.setLoggedIn(true);
                 return true;
             }
