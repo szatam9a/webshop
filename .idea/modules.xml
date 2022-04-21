@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/java-sv2-labs.iml" filepath="$PROJECT_DIR$/java-sv2-labs.iml" />
       <module fileurl="file://$PROJECT_DIR$/labs-csopormunka.iml" filepath="$PROJECT_DIR$/labs-csopormunka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webshop.iml" filepath="$PROJECT_DIR$/webshop.iml" />
     </modules>
   </component>
 </project>
